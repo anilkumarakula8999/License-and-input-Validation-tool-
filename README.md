@@ -1,7 +1,7 @@
-📘 Vodafone License Validation Tool (v1.4)
+📘 License & Input Validation Tool (v1.4)
 
-A Python Tkinter-based desktop application that validates Vodafone SIM license files against MNO input files.
-This tool automates manual comparisons during SIM data generation and ensures accuracy before sending files to production.
+A Python Tkinter-based desktop application that validates MNO Input Files (.inp) and Partner License Files (.txt) used in SIM data generation.
+This tool helps telecom data generation teams reduce manual effort, avoid mistakes, and automate file validation.
 
 🚀 Features
 ✔ ICCID Validation
@@ -12,13 +12,13 @@ Compares with License ICCID (Line 1)
 
 ✔ Product Code Validation
 
-Maps product type to product code:
+Supported mapping:
 
-JAVA → 0030
+Product	Code
+JAVA	0030
+NATIVE	2022
 
-NATIVE → 2022
-
-Extracts product code from License Key (characters 21–24) and verifies it.
+Extracts Product Code from License Key at positions 21–24.
 
 ✔ Quantity Validation
 
@@ -26,94 +26,116 @@ Reads input quantity (Line 5)
 
 Compares with license quantity (Line 2)
 
-✔ Error Reporting
+✔ Error Handling
 
-Shows detailed mismatch information:
+Provides detailed mismatch messages:
 
-Expected vs Actual values
+Expected vs Actual
 
-Missing fields
+Missing or invalid fields
 
-Invalid ICCID, product code, or quantity
+Wrong ICCID, quantity, or product code
+
+Invalid license key length
 
 ✔ Auto Report Generation
 
-Generates a validation report:
+A validation report is automatically generated:
+📄 <input_filename>_validation_report.txt
 
-<filename>_validation_report.txt
+The report includes:
 
+ICCID comparison
 
-Report contains all extracted values + all mismatches.
+Product name + product code
 
-✔ User-Friendly GUI
+Quantity comparison
 
-Browse buttons for file selection
+All validation errors
 
-Real-time validation messages
+✔ Simple Tkinter GUI
 
-Clean Tkinter interface
+Browse Input File
+
+Browse License File
+
+Validate
+
+Clear fields
+
+Live result window
 
 🛠 Tech Stack
 
 Python 3
 
-Tkinter (GUI)
+Tkinter GUI
 
 Regex
 
-OS / Datetime modules
+Datetime
 
-📂 Supported File Formats
-File Type	Format	Example
-Input File	.inp	Contains ICCID range, product name, quantity
-License File	.txt	Contains ICCID, quantity, and license key
-📌 How to Use
+OS module
 
-Open the application.
+📂 Supported File Types
+File Type	Format	Purpose
+.inp	MNO Input	Contains ICCID range, product name, quantity
+.txt	License File	Contains ICCID, quantity, license key
+📌 Usage
+Step 1 — Select Input File
 
-Select Input File (.inp).
+Choose the .inp file from MNO.
 
-Select License File (.txt).
+Step 2 — Select License File
 
-Click Validate.
+Choose the .txt license file from partner.
 
-View results on the screen.
+Step 3 — Validate
 
-Report file will be auto-saved next to the input file.
+The app checks:
 
-🧪 Validations Performed
-Validation	Input File	License File	Output
-Start ICCID	Line 25	Line 1	Match / Error
-Product Type	Line 16	Derived from Key	Match / Error
-Quantity	Line 5	Line 2	Match / Error
-Product Code	Mapped	Extracted from Key	Match / Error
-📄 Sample Report Output
+ICCID match
+
+Quantity match
+
+Product → Product Code mapping
+
+Product code from license key
+
+Step 4 — Get Report
+
+A report is saved in the same folder as input file.
+
+📄 Sample Validation Report
 Vodafone License Validation Report (Version 1.4)
-================================================
+===============================================
 
-Report Generated On: 2025-11-26 10:15:22
+Report Generated On: 2025-11-26 10:18:20
 
 Input File ICCID Start: 8991101200000000001
-License File ICCID: 8991101200000000001
+License File ICCID:     8991101200000000001
 
 Product Type: JAVA
 Expected Product Code: 0030
-Actual Product Code: 0030
+Actual Product Code:   0030
 
-Total Quantity: 5000
-License Quantity: 5000
+Quantity from Input File: 5000
+Quantity in License File: 5000
 
-Validation Successful. No errors found.
+Validation Successful — No errors found.
 
-📦 Installation
+🧪 Installation
+
+Install Tkinter (usually pre-installed with Python):
+
 pip install tk
 
 
 Clone the repository:
 
-git clone https://github.com/anilkumarakula8999/ansible
+git clone https://github.com/anilkumarakula8999/License-and-input-Validation-tool-
 
 
 Run the tool:
 
-python validation_tool.py
+python license_validator.py
